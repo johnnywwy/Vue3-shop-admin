@@ -1,14 +1,40 @@
 import router from "./router";
 import { getToken } from "./composables/auth";
+import { toast, showFullLoading, hideFullLoading } from "./composables/util";
+import store from "./store";
 
 // 全局前置路由守卫
-router.beforeEach((to, from, next) => {
-  console.log(to, from);
+router.beforeEach(async (to, from, next) => {
+  //   console.log(to, from);
+
+  showFullLoading();
+
   const token = getToken();
   // 没有登录 想去的页面还是要登录后才能看的页面
-  if (!token && to.path != "/login") {
+  if (!token && to.path !== "/login") {
+    toast("登录啊，亲！", "error");
     return next({ path: "/login" });
   }
+
+  // 防止重复登录
+  if (token && to.path === "/login") {
+    toast("别重复登录啊，亲！", "error");
+    return next({ path: from.path ? from.path : "/" });
+  }
+
+  //   如果用户登录了 就自动获取用户信息 并保存在vuex中
+
+  if (token) {
+    await store.dispatch("getInfo");
+  }
+  //   getInfo().then((res2) => {
+  //     store.commit("SET_USERINFO", res2);
+  //     // console.log(res2);
+  //   });
+
   next();
-  return false;
 });
+
+router.afterEach((to, from,) => {
+  hideFullLoading()
+})

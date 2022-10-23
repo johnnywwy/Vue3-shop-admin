@@ -26,7 +26,7 @@
         :model="formState"
         class="w-[250px]"
         :rules="rules"
-        @finish="handleSubmit"
+        @finish="onSubmit"
       >
         <a-form-item name="username">
           <a-input
@@ -44,8 +44,8 @@
             placeholder="请输入密码"
           >
             <template #prefix>
-              <LockOutlined style="color: rgba(0, 0, 0, 0.25)"
-            /></template>
+              <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
+            </template>
           </a-input-password>
         </a-form-item>
         <a-form-item>
@@ -66,10 +66,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, toRaw } from "vue";
+import { onBeforeUnmount, onMounted, reactive, ref, toRaw } from "vue";
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import type { FormInstance } from "ant-design-vue";
-import { login, getInfo } from "../api/manager";
+import { login } from "../api/manager";
 import { useRouter } from "vue-router";
 import { setToken } from "../composables/auth";
 import { toast } from "../composables/util";
@@ -115,29 +115,35 @@ const rules = reactive({
 });
 
 // 登录功能
-const handleSubmit = async () => {
+const onSubmit = async () => {
   const valid = await formRef.value?.validate();
   if (!valid) {
     return false;
   }
   loading.value = true;
-  login(formState.username, formState.password)
+  store
+    .dispatch("login", formState)
     .then((res) => {
-      // 1、提示成功
       toast("登录成功！");
-      // 2、保存用户token 和相关信息
-      setToken(res.token);
-
-      // 获取用户相关信息
-      getInfo().then((res2) => {
-        store.commit("SET_USERINFO", res2);
-        // console.log(res2);
-      });
-      // 3、跳转后台页面
       router.push("/");
     })
     .finally(() => {
       loading.value = false;
     });
 };
+
+const onKeyUp = (e: KeyboardEvent) => {
+  // console.log(e);
+  if (e.key === "Enter") {
+    onSubmit();
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keyup", onKeyUp);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("keyup", onKeyUp);
+});
 </script>

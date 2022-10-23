@@ -15,6 +15,9 @@ import store from "./store";
 // 引入路由守卫
 import "./permission";
 
+// 引入全局loading进度条
+import 'nprogress/nprogress.css'
+
 const app = createApp(App);
 app.use(store);
 app.use(router);
