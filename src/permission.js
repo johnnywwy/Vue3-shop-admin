@@ -23,7 +23,6 @@ router.beforeEach(async (to, from, next) => {
   }
 
   //   如果用户登录了 就自动获取用户信息 并保存在vuex中
-
   if (token) {
     await store.dispatch("getInfo");
   }
@@ -31,6 +30,10 @@ router.beforeEach(async (to, from, next) => {
   //     store.commit("SET_USERINFO", res2);
   //     // console.log(res2);
   //   });
+  // 设置页面标题
+  console.log(to.meta.title);
+  let title = (to.meta.title ? to.meta.title : '') + '-商城后台'
+  document.title = title
 
   next();
 });
