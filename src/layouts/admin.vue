@@ -1,12 +1,15 @@
 <template>
   <a-layout>
-    <a-layout-header class="header">
-      <f-header />
-    </a-layout-header>
+    <!-- 侧边栏 -->
+    <a-layout-sider class="menu">
+      <f-menu />
+    </a-layout-sider>
     <a-layout class="layout">
-      <a-layout-sider>
-        <f-menu class="menu"></f-menu>
-      </a-layout-sider>
+      <!-- 头部 -->
+      <a-layout-header class="header">
+        <f-header />
+      </a-layout-header>
+      <!-- 主体 -->
       <a-layout-content class="main">
         <f-tag-list />
         <router-view></router-view>
@@ -22,16 +25,13 @@ import FTagList from "./components/FTagList.vue";
 
 <style scoped>
 .header {
-  background: pink;
+  background: #fff;
 }
 .layout {
-  height: calc(100vh - 64px);
+  height: calc(100vh);
 }
 .menu {
   height: inherit;
-  background: green;
-}
-.main {
-  color: red;
+  /* background: #ccc; */
 }
 </style>
