@@ -32,7 +32,7 @@ router.beforeEach(async (to, from, next) => {
   //   });
   // 设置页面标题
   console.log(to.meta.title);
-  let title = (to.meta.title ? to.meta.title : '') + '-商城后台'
+  let title = (to.meta.title ? to.meta.title : '') + '-汇海智慧体育平台'
   document.title = title
 
   next();

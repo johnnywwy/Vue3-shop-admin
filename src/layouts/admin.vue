@@ -7,18 +7,15 @@
       <f-menu></f-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0; border: 1px solid red;">
+      <a-layout-header style="background: #fff; padding: 0;">
         <f-header></f-header>
       </a-layout-header>
-      <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>User</a-breadcrumb-item>
-          <a-breadcrumb-item>Bill</a-breadcrumb-item>
-        </a-breadcrumb>
+      <a-layout-content style="margin: 16px 16px">
         <div :style="{ padding: '24px', background: '#fff', minHeight: '80vh' }">
-          <index></index>
+          <!-- <index></index> -->
+          <router-view></router-view>
+          <!-- <PhysicalScoreAnalysisVue></PhysicalScoreAnalysisVue> -->
         </div>
-       
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -26,10 +23,14 @@
 <script lang="ts" setup>
 
 import FMenu from './components/FMenu.vue';
-// import FMenu from './components/FMenu.vue';
 import FHeader from './components/FHeader.vue';
 import FTagListVue from './components/FTagList.vue';
 import index from '../pages/index.vue';
+
+import PhysicalScoreAnalysisVue from '../pages/analysisManage/PhysicalScoreAnalysis.vue';
+import SubjectScoreAnalysisVue from '../pages/analysisManage/SubjectScoreAnalysis.vue';
+import PhysicalBMIAnalysisVue from '../pages/analysisManage/PhysicalBMIAnalysis.vue';
+
 
 import { ref } from 'vue';
 

@@ -1,29 +1,21 @@
 <template>
   <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" @select="handelSelect">
-    <!-- <a-menu-item key="1">
-      <pie-chart-outlined />
-      <span>成绩管理</span>
-    </a-menu-item>
-    <a-menu-item key="2">
-      <desktop-outlined />
-      <span>体测预约</span>
-    </a-menu-item> -->
     <template v-for="(item, index) in asideMenu" :key="index">
-      <a-sub-menu v-if="item.child && item.child.length > 0" :key="item.name" >
+      <a-sub-menu v-if="item.child && item.child.length > 0" :key="item.path">
         <template #title>
           <span>
-            <component :is="item.meta?.icon"></component>
-            <span>{{ item.meta?.title }}</span>
+            <component :is="item.icon"></component>
+            <span>{{ item.name }}</span>
           </span>
         </template>
-        <a-menu-item v-for="(it, i) in item.child" :key="it.name">
-          <component :is="it.meta?.icon"></component>
-          {{ it.meta?.title }}
+        <a-menu-item v-for="(it, i) in item.child" :key="it.path">
+          <component :is="it.icon"></component>
+          {{ it.name }}
         </a-menu-item>
       </a-sub-menu>
       <a-menu-item v-else :key="index">
-        <component :is="item.meta?.icon"></component>
-        <span>{{ item.meta?.title }}</span>
+        <component :is="item.icon"></component>
+        <span>{{ item.name }}</span>
       </a-menu-item>
     </template>
   </a-menu>
@@ -38,108 +30,136 @@ import {
   TeamOutlined,
   UnorderedListOutlined,
   FundOutlined,
-  SettingOutlined
+  SettingOutlined,
+  HomeOutlined
 } from '@ant-design/icons-vue';
+
 import { ref } from 'vue';
 
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 const selectedKeys = ref<string[]>(['1'])
 
 const asideMenu = [
   {
-    // 成绩管理
-    "name": 'ScoreManage',
+    name: '欢迎页面',
     "path": '/score-manage',
-    "meta": { "title": '成绩管理', "icon": PieChartOutlined },
+    icon: HomeOutlined,
+    key: '/score-manage',
+    meta: [{ "path": '/score-manage' }]
+  },
+  {
+    // 成绩管理
+    name: '成绩管理',
+    "path": '/score-manage',
+    icon: PieChartOutlined,
+    key: '/score-manage',
     "child": [{
+      name: '原始成绩管理',
       "path": '/score-manage/list',
-      "name": 'ScoreManageList',
-      "meta": { "title": '原始成绩管理', "icon": PieChartOutlined },
+      icon: PieChartOutlined,
+      key: '/score-manage/list',
     }, {
+      name: '学生成绩管理',
       "path": '/score-manage/student',
-      "name": 'ScoreManageStudent',
-      "meta": { "title": '学生成绩管理', "icon": PieChartOutlined },
+      icon: PieChartOutlined,
+      key: '/score-manage/student',
     }, {
+      name: '成绩采集管理',
       "path": '/score-manage/import',
-      "name": 'ScoreManageImport',
-      "meta": { "title": '成绩采集管理', "icon": PieChartOutlined },
+      icon: PieChartOutlined,
+      key: '/score-manage/import',
     }]
   },
   {
-    name: 'PhysicalBooking',
+    name: '体测预约',
     path: '/booking-manage',
     icon: DesktopOutlined,
-    meta: { icon: DesktopOutlined, title: '体测预约' },
     child: [{
-      name: 'PhysicalBookingList',
+      name: '预约场地管理',
       path: '/booking-manage/list',
       icon: DesktopOutlined,
-      meta: { icon: DesktopOutlined, title: '预约场地管理' },
     }, {
       path: '/booking-manage/report',
-      name: 'PhysicalBookingReport',
-      meta: { icon: DesktopOutlined, title: '预约报表管理' },
+      name: '预约报表管理',
+      icon: DesktopOutlined,
     }, {
       path: '/booking-manage/state',
-      name: 'PhysicalBookingState',
-      meta: { icon: DesktopOutlined, title: '预约情况管理' },
+      name: '预约情况管理',
+      icon: DesktopOutlined,
     }, {
       path: '/booking-manage/log',
-      name: 'PhysicalBookingLog',
-      meta: { icon: DesktopOutlined, title: '预约日志管理' },
+      name: '预约日志管理',
+      icon: DesktopOutlined,
     }]
   },
-  // {
-  //   "name": '学生管理',
-  //   "icon": UserOutlined,
-  //   "child": [{
-  //     "name": '学生信息',
-  //     "icon": UserOutlined,
-  //   }, {
-  //     "name": '学生特征值',
-  //     "icon": UserOutlined,
-  //   }]
-  // },
-  // {
-  //   "name": '体测统计',
-  //   "icon": TeamOutlined,
-  //   "child": [{
-  //     "name": '总分统计',
-  //     "icon": TeamOutlined,
-  //   }, {
-  //     "name": '单科统计',
-  //     "icon": TeamOutlined,
-  //   }, {
-  //     "name": 'BMI统计',
-  //     "icon": TeamOutlined,
-  //   }]
-  // },
-  // {
-  //   "name": '信息管理',
-  //   "icon": UnorderedListOutlined,
-  //   "child": [{
-  //     "name": '班级信息',
-  //     "icon": UnorderedListOutlined,
-  //   }, {
-  //     "name": '学校信息',
-  //     "icon": UnorderedListOutlined,
-  //   }, {
-  //     "name": '区域信息',
-  //     "icon": UnorderedListOutlined,
-  //   }]
-  // },
-  // {
-  //   "name": '统计图表',
-  //   "icon": FundOutlined,
-  // },
-  // {
-  //   "name": '系统设置',
-  //   "icon": SettingOutlined,
-  // },
+  {
+    name: '学生管理',
+    icon: UserOutlined,
+    path: '/booking-manage/state',
+    child: [{
+      name: '学生信息',
+      icon: UserOutlined,
+      path: '/student-manage/student-info',
+    }, {
+      name: '学生特征值',
+      icon: UserOutlined,
+      path: '/student-manage/student-feature',
+    }]
+  },
+  {
+    name: '体测统计',
+    icon: TeamOutlined,
+    path: '/analysis',
+    child: [{
+      name: '总分统计',
+      icon: TeamOutlined,
+      path: '/analysis/physical-score',
+    }, {
+      name: '单科统计',
+      icon: TeamOutlined,
+      path: '/analysis/subject-score',
+    }, {
+      name: 'BMI统计',
+      icon: TeamOutlined,
+      path: '/analysis/BMI-score',
+    }]
+  },
+  {
+    path: '/info-manage',
+    name: '信息管理',
+    icon: UnorderedListOutlined,
+    child: [{
+      path: '/info-manage/class-info',
+      name: '班级信息',
+      icon: UnorderedListOutlined,
+    }, {
+      path: '/info-manage/schcool-info',
+      name: '学校信息',
+      icon: UnorderedListOutlined,
+    }, {
+      path: '/info-manage/area-info',
+      name: '区域信息',
+      icon: UnorderedListOutlined,
+    }]
+  },
+  {
+    path: '/statisticsChart',
+    name: '统计图表',
+    icon: FundOutlined,
+  },
+  {
+    name: '系统设置',
+    icon: SettingOutlined,
+    path: '/system-setting',
+  },
 ]
 
-const handelSelect = (e) => {
-  console.log(e);
+// 选择侧边栏
+const handelSelect = (item) => {
+  console.log(item.key);
+  router.push(item.key)
 }
 
 </script>
