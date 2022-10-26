@@ -10,7 +10,6 @@
       <a-layout-header style="background: #fff; padding: 0; border: 1px solid red;">
         <f-header></f-header>
       </a-layout-header>
-
       <a-layout-content style="margin: 0 16px">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>User</a-breadcrumb-item>
