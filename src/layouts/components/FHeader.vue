@@ -140,7 +140,7 @@ const onClick: MenuProps['onClick'] = ({ key }) => {
 
   display: flex;
   height: 100%;
-  @apply flex items-center;
+  @apply flex items-center px-5;
 
   .btn-wrapper {
     @apply flex items-center justify-center;
