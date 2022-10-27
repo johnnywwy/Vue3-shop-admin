@@ -20,7 +20,10 @@
         </template>
         <sync-outlined @click="refresh" class="btn" />
       </a-tooltip>
+    </div>
 
+    <div>
+      <PhysicalProjectSelector></PhysicalProjectSelector>
     </div>
     <div class="ml-auto">
       <a-avatar size="small" :src="$store.state.user.avatar" class="mx-2" />
@@ -41,19 +44,15 @@
         </template>
       </a-dropdown>
     </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  MenuFoldOutlined,
-  SyncOutlined,
-} from "@ant-design/icons-vue";
+import { MenuFoldOutlined, SyncOutlined } from "@ant-design/icons-vue";
 import logo from "@/assets/logo.png";
-import type { SelectProps } from 'ant-design-vue';
+import type { SelectProps } from "ant-design-vue";
 import { DownOutlined } from "@ant-design/icons-vue";
-import type { MenuProps } from 'ant-design-vue';
+import type { MenuProps } from "ant-design-vue";
 
 import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
 import { Modal } from "ant-design-vue";
@@ -62,6 +61,7 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { logout } from "../../api/manager";
 import { showModal, toast } from "../../composables/util";
+import PhysicalProjectSelector from "../../pages/analysisManage/components/PhysicalProjectSelector.vue";
 
 const router = useRouter();
 const store = useStore();
@@ -85,13 +85,13 @@ const handleLogout = () => {
 
 // 关闭侧边导航来
 const closeSide = () => {
-  console.log('关闭侧边导航栏');
-}
+  console.log("关闭侧边导航栏");
+};
 
 // 刷新页面
 const refresh = () => {
-  location.reload()
-}
+  location.reload();
+};
 // const value1 = ref("lucy");
 
 // const options1 = ref<SelectProps['options']>([
@@ -122,14 +122,14 @@ const refresh = () => {
 //   console.log(`selected ${value}`);
 // };
 
-const onClick: MenuProps['onClick'] = ({ key }) => {
+const onClick: MenuProps["onClick"] = ({ key }) => {
   console.log(key);
   switch (key) {
-    case 'rePassword':
-      console.log('修改密码');
+    case "rePassword":
+      console.log("修改密码");
       break;
-    case 'logout':
-      handleLogout()
+    case "logout":
+      handleLogout();
       break;
   }
 };
@@ -137,7 +137,6 @@ const onClick: MenuProps['onClick'] = ({ key }) => {
 
 <style scoped lang="less">
 .f-header {
-
   display: flex;
   height: 100%;
   @apply flex items-center px-5;
@@ -145,11 +144,11 @@ const onClick: MenuProps['onClick'] = ({ key }) => {
   .btn-wrapper {
     @apply flex items-center justify-center;
     height: inherit;
-    .btn{
+    .btn {
       @apply flex items-center justify-center px-2;
       height: inherit;
     }
-    .btn:hover{
+    .btn:hover {
       @apply bg-light-500;
     }
   }

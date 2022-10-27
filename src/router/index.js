@@ -40,14 +40,15 @@ const routes = [
   {
     path: "/",
     component: Admin,
+    name: 'home',
+    redirect: '/home/welcome',
     // 子路由
     children: [
       {
-        path: "/home",
+        path: '/home/welcome',
+        name: 'welcome',
+        meta: { title: '欢迎', icon: 'icon-icon-test' },
         component: Index,
-        meta: {
-          title: '后台首页'
-        },
       },
       // 成绩管理
       {

@@ -1,5 +1,10 @@
 <template>
-  <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" @select="handelSelect">
+  <a-menu
+    v-model:selectedKeys="selectedKeys"
+    theme="dark"
+    mode="inline"
+    @select="handelSelect"
+  >
     <template v-for="(item, index) in asideMenu" :key="index">
       <a-sub-menu v-if="item.child && item.child.length > 0" :key="item.path">
         <template #title>
@@ -22,7 +27,6 @@
 </template>
 
 <script setup lang="ts">
-
 import {
   PieChartOutlined,
   DesktopOutlined,
@@ -31,143 +35,156 @@ import {
   UnorderedListOutlined,
   FundOutlined,
   SettingOutlined,
-  HomeOutlined
-} from '@ant-design/icons-vue';
+  HomeOutlined,
+} from "@ant-design/icons-vue";
 
-import { ref } from 'vue';
+import { ref } from "vue";
 
-import { useRouter } from 'vue-router';
-const router = useRouter()
+import { useRouter } from "vue-router";
+const router = useRouter();
 
-const selectedKeys = ref<string[]>(['1'])
+const selectedKeys = ref<string[]>(["1"]);
 
 const asideMenu = [
   {
-    name: '首页',
-    path: '/',
+    name: "首页",
+    path: "/home",
     icon: HomeOutlined,
-    key: '/',
+    key: "/home",
     // meta: [{ path: '/home' }]
-    child: [{
-      name: '家',
-      path: '/home',
-      icon: HomeOutlined,
-      key: '/home',
-    }]
   },
   {
     // 成绩管理
-    name: '成绩管理',
-    "path": '/score-manage',
+    name: "成绩管理",
+    path: "/score-manage",
     icon: PieChartOutlined,
-    key: '/score-manage',
-    child: [{
-      name: '原始成绩管理',
-      path: '/score-manage/list',
-      icon: PieChartOutlined,
-      key: '/score-manage/list',
-    }, {
-      name: '学生成绩管理',
-      path: '/score-manage/student',
-      icon: PieChartOutlined,
-      key: '/score-manage/student',
-    }, {
-      name: '成绩采集管理',
-      path: '/score-manage/import',
-      icon: PieChartOutlined,
-      key: '/score-manage/import',
-    }]
+    key: "/score-manage",
+    child: [
+      {
+        name: "原始成绩管理",
+        path: "/score-manage/list",
+        icon: PieChartOutlined,
+        key: "/score-manage/list",
+      },
+      {
+        name: "学生成绩管理",
+        path: "/score-manage/student",
+        icon: PieChartOutlined,
+        key: "/score-manage/student",
+      },
+      {
+        name: "成绩采集管理",
+        path: "/score-manage/import",
+        icon: PieChartOutlined,
+        key: "/score-manage/import",
+      },
+    ],
   },
   {
-    name: '体测预约',
-    path: '/booking-manage',
+    name: "体测预约",
+    path: "/booking-manage",
     icon: DesktopOutlined,
-    child: [{
-      name: '预约场地管理',
-      path: '/booking-manage/list',
-      icon: DesktopOutlined,
-    }, {
-      path: '/booking-manage/report',
-      name: '预约报表管理',
-      icon: DesktopOutlined,
-    }, {
-      path: '/booking-manage/state',
-      name: '预约情况管理',
-      icon: DesktopOutlined,
-    }, {
-      path: '/booking-manage/log',
-      name: '预约日志管理',
-      icon: DesktopOutlined,
-    }]
+    child: [
+      {
+        name: "预约场地管理",
+        path: "/booking-manage/list",
+        icon: DesktopOutlined,
+      },
+      {
+        path: "/booking-manage/report",
+        name: "预约报表管理",
+        icon: DesktopOutlined,
+      },
+      {
+        path: "/booking-manage/state",
+        name: "预约情况管理",
+        icon: DesktopOutlined,
+      },
+      {
+        path: "/booking-manage/log",
+        name: "预约日志管理",
+        icon: DesktopOutlined,
+      },
+    ],
   },
   {
-    name: '学生管理',
+    name: "学生管理",
     icon: UserOutlined,
-    path: '/booking-manage/state',
-    child: [{
-      name: '学生信息',
-      icon: UserOutlined,
-      path: '/student-manage/student-info',
-    }, {
-      name: '学生特征值',
-      icon: UserOutlined,
-      path: '/student-manage/student-feature',
-    }]
+    path: "/booking-manage/state",
+    child: [
+      {
+        name: "学生信息",
+        icon: UserOutlined,
+        path: "/student-manage/student-info",
+      },
+      {
+        name: "学生特征值",
+        icon: UserOutlined,
+        path: "/student-manage/student-feature",
+      },
+    ],
   },
   {
-    name: '体测统计',
+    name: "体测统计",
     icon: TeamOutlined,
-    path: '/analysis',
-    child: [{
-      name: '总分统计',
-      icon: TeamOutlined,
-      path: '/analysis/physical-score',
-    }, {
-      name: '单科统计',
-      icon: TeamOutlined,
-      path: '/analysis/subject-score',
-    }, {
-      name: 'BMI统计',
-      icon: TeamOutlined,
-      path: '/analysis/BMI-score',
-    }]
+    path: "/analysis",
+    child: [
+      {
+        name: "总分统计",
+        icon: TeamOutlined,
+        path: "/analysis/physical-score",
+      },
+      {
+        name: "单科统计",
+        icon: TeamOutlined,
+        path: "/analysis/subject-score",
+      },
+      {
+        name: "BMI统计",
+        icon: TeamOutlined,
+        path: "/analysis/BMI-score",
+      },
+    ],
   },
   {
-    path: '/info-manage',
-    name: '信息管理',
+    path: "/info-manage",
+    name: "信息管理",
     icon: UnorderedListOutlined,
-    child: [{
-      path: '/info-manage/class-info',
-      name: '班级信息',
-      icon: UnorderedListOutlined,
-    }, {
-      path: '/info-manage/schcool-info',
-      name: '学校信息',
-      icon: UnorderedListOutlined,
-    }, {
-      path: '/info-manage/area-info',
-      name: '区域信息',
-      icon: UnorderedListOutlined,
-    }]
+    child: [
+      {
+        path: "/info-manage/class-info",
+        name: "班级信息",
+        icon: UnorderedListOutlined,
+      },
+      {
+        path: "/info-manage/schcool-info",
+        name: "学校信息",
+        icon: UnorderedListOutlined,
+      },
+      {
+        path: "/info-manage/area-info",
+        name: "区域信息",
+        icon: UnorderedListOutlined,
+      },
+    ],
   },
   {
-    path: '/statisticsChart',
-    name: '统计图表',
+    path: "/statisticsChart",
+    name: "统计图表",
     icon: FundOutlined,
   },
   {
-    name: '系统设置',
+    name: "系统设置",
     icon: SettingOutlined,
-    path: '/system-setting',
+    path: "/system-setting",
   },
-]
+];
 
 // 选择侧边栏
 const handelSelect = (item) => {
   console.log(item.key);
-  router.push(item.key)
-}
-
+  router.push(item.key);
+};
 </script>
 
 <style scoped lang="less">

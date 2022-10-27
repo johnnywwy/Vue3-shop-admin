@@ -40,8 +40,8 @@ onBeforeRouteUpdate((to, from) => {
 
 const tabList = ref([
   {
-    title: `后台首页`,
-    path: "/home",
+    title: "欢迎",
+    path: "/home/welcome",
     closable: false,
   },
 ]);
