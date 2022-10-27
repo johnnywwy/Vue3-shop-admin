@@ -1,10 +1,20 @@
 <template>
   <div>
-    <!-- <div :style="{ marginBottom: '16px' }">
-      <a-button @click="add">ADD</a-button>
-    </div> -->
-    <a-tabs v-model:activeKey="activeTab" hide-add type="editable-card" @edit="onEdit">
-      <a-tab-pane v-for="pane in tabList" :key="pane.path" :tab="pane.title" :closable="pane.closable">
+    <a-tabs
+      v-model:activeKey="activeTab"
+      hide-add
+      type="editable-card"
+      @edit="onEdit"
+      @change="changeTab"
+      class="red"
+    >
+      <a-tab-pane
+        class="tab-pane"
+        v-for="pane in tabList"
+        :key="pane.path"
+        :tab="pane.title"
+        :closable="pane.closable"
+      >
         <!-- {{ pane.content }} -->
       </a-tab-pane>
     </a-tabs>
@@ -12,87 +22,91 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useRoute, onBeforeRouteUpdate } from 'vue-router';
+import { onMounted, ref } from "vue";
+import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 
 import { useCookies } from "@vueuse/integrations/useCookies";
-const cookies = useCookies();
-const route = useRoute()
-// const router = useRouter()
+const cookie = useCookies();
+const route = useRoute();
+const router = useRouter();
 
 onBeforeRouteUpdate((to, from) => {
-  // console.log({
-  //   title: to.meta.title,
-  //   path: to.path
-  // });
+  activeTab.value = to.path;
   addTab({
     title: to.meta.title,
-    path: to.path
-  })
-
-})
-
+    path: to.path,
+  });
+});
 
 const tabList = ref([
   {
-    title: `学生成绩管理`,
-    path: '/score-manage/student',
-    closable: false
-  }, {
-    title: `原始成绩管理`,
-    path: '/score-manage/list',
-    closable: true
-  }
-])
-// const panes = ref<{ title: string; key: string; closable?: boolean; path: string }[]>(
-//   new Array(2).fill(null).map((_, index) => {
-//     const id = String(index + 1);
-//     return {
-//       title: `后台首页 ${id}`,
-//       key: id,
-//       path: '/'
-//     };
-//   }),
-// );
+    title: `后台首页`,
+    path: "/home",
+    closable: false,
+  },
+]);
+
 const activeTab = ref(route.path);
 
-const remove = (targetKey: string) => {
-  console.log(targetKey);
+const remove = (t: string) => {
+  console.log(t);
+  let tabs = tabList.value;
+  let a = activeTab.value;
+  if (a == t) {
+    tabs.forEach((tab, index) => {
+      if (tab.path == t) {
+        const nextTab = tabs[index + 1] || tabs[index - 1];
+        console.log(nextTab);
 
-  // let lastIndex = 0;
-  // panes.value.forEach((pane, i) => {
-  //   if (pane.path === targetKey) {
-  //     lastIndex = i - 1;
-  //   }
-  // });
-  // panes.value = panes.value.filter(pane => pane.path !== targetKey);
-  // if (panes.value.length && activeKey.value === targetKey) {
-  //   if (lastIndex >= 0) {
-  //     activeKey.value = panes.value[lastIndex].path;
-  //   } else {
-  //     activeKey.value = panes.value[0].path;
-  //   }
-  // }
+        if (nextTab) {
+          a = nextTab.path;
+        }
+      }
+    });
+  }
+  activeTab.value = a;
+  tabList.value = tabList.value.filter((tab) => tab.path != t);
+  cookie.set("tabList", tabList.value);
+  router.push(activeTab.value);
 };
+
+// 初始化标签导航栏
+const initTabList = () => {
+  let tbs = cookie.get("tabList");
+  if (tbs) {
+    tabList.value = tbs;
+  }
+};
+
+initTabList();
 
 // 添加标签导航栏
 const addTab = (tab) => {
-  let noTab = tabList.value.findIndex(t => t.path === tab.path) === -1
+  let noTab = tabList.value.findIndex((t) => t.path === tab.path) === -1;
   if (noTab) {
-    tabList.value.push(tab)
+    tabList.value.push(tab);
   }
-  console.log(tabList.value);
-  
-  cookies.set("tabList", tabList.value)
-}
+  cookie.set("tabList", tabList.value);
+};
 
 const onEdit = (targetKey: string) => {
+  console.log(targetKey);
+
   remove(targetKey);
 };
 
-
+const changeTab = (t) => {
+  console.log("change", t);
+  router.push(t);
+  activeTab.value = t;
+};
 </script>
 
-<style lang='less' scoped>
-
+<style lang="less" scoped>
+.red {
+  // border: 1px solid red;
+}
+:deep(.ant-tabs-nav) {
+  margin-bottom: 0px !important;
+}
 </style>

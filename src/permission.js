@@ -31,7 +31,7 @@ router.beforeEach(async (to, from, next) => {
   //     // console.log(res2);
   //   });
   // 设置页面标题
-  console.log(to.meta.title);
+  // console.log(to.meta.title);
   let title = (to.meta.title ? to.meta.title : '') + '-汇海智慧体育平台'
   document.title = title
 
