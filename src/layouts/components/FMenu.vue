@@ -43,11 +43,17 @@ const selectedKeys = ref<string[]>(['1'])
 
 const asideMenu = [
   {
-    name: '欢迎页面',
-    "path": '/score-manage',
+    name: '首页',
+    path: '/',
     icon: HomeOutlined,
-    key: '/score-manage',
-    meta: [{ "path": '/score-manage' }]
+    key: '/',
+    // meta: [{ path: '/home' }]
+    child: [{
+      name: '家',
+      path: '/home',
+      icon: HomeOutlined,
+      key: '/home',
+    }]
   },
   {
     // 成绩管理
@@ -55,19 +61,19 @@ const asideMenu = [
     "path": '/score-manage',
     icon: PieChartOutlined,
     key: '/score-manage',
-    "child": [{
+    child: [{
       name: '原始成绩管理',
-      "path": '/score-manage/list',
+      path: '/score-manage/list',
       icon: PieChartOutlined,
       key: '/score-manage/list',
     }, {
       name: '学生成绩管理',
-      "path": '/score-manage/student',
+      path: '/score-manage/student',
       icon: PieChartOutlined,
       key: '/score-manage/student',
     }, {
       name: '成绩采集管理',
-      "path": '/score-manage/import',
+      path: '/score-manage/import',
       icon: PieChartOutlined,
       key: '/score-manage/import',
     }]

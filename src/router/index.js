@@ -43,7 +43,7 @@ const routes = [
     // 子路由
     children: [
       {
-        path: "/",
+        path: "/home",
         component: Index,
         meta: {
           title: '后台首页'
