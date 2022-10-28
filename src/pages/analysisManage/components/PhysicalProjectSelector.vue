@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form class="mb-0">
+    <a-form>
       <a-form-item label="体测计划" class="mb-0 mx-5">
         <a-select
           placeholder="请选择体测计划"

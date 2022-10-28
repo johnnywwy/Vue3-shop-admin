@@ -9,7 +9,7 @@
       class="red"
     >
       <a-tab-pane
-        class="tab-pane"
+        class="tab-pane red"
         v-for="pane in tabList"
         :key="pane.path"
         :tab="pane.title"
@@ -108,5 +108,9 @@ const changeTab = (t) => {
 }
 :deep(.ant-tabs-nav) {
   margin-bottom: 0px !important;
+}
+:deep(.ant-tabs-tab){
+  background: red;
+  border: 1px solid red;
 }
 </style>

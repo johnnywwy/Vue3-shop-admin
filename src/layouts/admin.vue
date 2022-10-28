@@ -11,11 +11,26 @@
         <f-header></f-header>
       </a-layout-header>
       <a-layout-content style="margin: 16px 16px">
+
         <f-tag-list-vue></f-tag-list-vue>
         <div :style="{ padding: '24px', background: '#fff', minHeight: '80vh' }">
-          
-          <router-view></router-view>
-          <!-- <PhysicalScoreAnalysisVue></PhysicalScoreAnalysisVue> -->
+          <!-- 面包屑 -->
+          <!-- <div class="mb-4">
+            <a-breadcrumb>
+              <a-breadcrumb-item>Home</a-breadcrumb-item>
+              <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
+              <a-breadcrumb-item><a href="">Application List</a></a-breadcrumb-item>
+              <a-breadcrumb-item>An Application</a-breadcrumb-item>
+            </a-breadcrumb>
+          </div> -->
+
+          <router-view v-slot="{ Component }">
+            <transition name="fade">
+              <keep-alive :max="10">
+                <component :is="Component"></component>
+              </keep-alive>
+            </transition>
+          </router-view>
         </div>
       </a-layout-content>
     </a-layout>
@@ -34,9 +49,14 @@ import PhysicalBMIAnalysisVue from '../pages/analysisManage/PhysicalBMIAnalysis.
 
 
 import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 
 const collapsed = ref<boolean>(false)
+const route = useRoute()
+const router = useRouter()
+console.log(route);
+console.log(router);
 
 
 </script>
@@ -60,5 +80,29 @@ const collapsed = ref<boolean>(false)
 
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 300ms;
+}
+.fade-enter-active{
+  transition-delay: 300ms;
 }
 </style>

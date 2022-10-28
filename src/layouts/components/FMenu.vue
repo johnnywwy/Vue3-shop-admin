@@ -4,6 +4,7 @@
     theme="dark"
     mode="inline"
     @select="handelSelect"
+    style="background: #001529;"
   >
     <template v-for="(item, index) in asideMenu" :key="index">
       <a-sub-menu v-if="item.child && item.child.length > 0" :key="item.path">
