@@ -1,59 +1,28 @@
 import { createStore } from "vuex";
-import { login, getinfo } from "../api/manager";
-import { setToken, removeToken } from "../composables/auth";
-// 创建一个新的 store 实例
-const store = createStore({
-  state() {
-    return {
-      // 用户信息
-      user: {},
-    };
-  },
-  mutations: {
-    // 记录用户信息
-    SET_USERINFO(state, user) {
-      state.user = user;
-    },
-  },
-  actions: {
-    // 登录
-    login({ commit }, { username, password }) {
-      return new Promise((resolve, reject) => {
-        login(username, password)
-          .then((res) => {
-            setToken(res.token);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
 
-    // 获取当前登录用户信息
-    getInfo({ commit }) {
-      return new Promise((resolve, reject) => {
-        getinfo()
-          .then((res) => {
-            commit("SET_USERINFO", res);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
+import userStore from './modules/userStore';
+// import platformStore from './modules/platformStore';
+// import physicalProjectStore from './modules/physicalProjectStore';
+// import divisionStore from './modules/divisionStore';
+// import schoolStore from './modules/schoolStore';
+// import scoreAnalysisStore from './modules/scoreAnalysisStore';
+// import classesStore from './modules/classesStore';
+// import gradeStore from './modules/gradeStore';
+// import bookingStore from './modules/bookingStore';
+// import studentStore from './modules/studentStore';
 
-    //退出登录
-    logout({ commit }) {
 
-      // 移除cookies
-      removeToken()
-      // 清除用户状态
-      commit("SET_USERINFO", {});
-
-    }
+export default createStore({
+  modules: {
+    user: userStore,
+    // platform: platformStore,
+    // project: physicalProjectStore,
+    // division: divisionStore,
+    // school: schoolStore,
+    // classes: classesStore,
+    // grade: gradeStore,
+    // scoreAnalysis: scoreAnalysisStore,
+    // booking: bookingStore,
+    // student:studentStore,
   },
 });
-
-export default store;

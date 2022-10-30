@@ -8,7 +8,7 @@ export function toast(message, type = "success") {
   return notification[type]({
     message,
     type,
-    duration: 2.5,
+    duration: 1.5,
   });
 }
 export function showModal(title = '提示内容', content = '') {

@@ -69,11 +69,12 @@
 import { onBeforeUnmount, onMounted, reactive, ref, toRaw } from "vue";
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import type { FormInstance } from "ant-design-vue";
-import { login } from "../api/manager";
+
 import { useRouter } from "vue-router";
 import { setToken } from "../composables/auth";
 import { toast } from "../composables/util";
 import { useStore } from "vuex";
+import { Action_UserLogin } from "../store/mutation-types";
 
 const router = useRouter();
 const store = useStore();
@@ -122,7 +123,7 @@ const onSubmit = async () => {
   }
   loading.value = true;
   store
-    .dispatch("login", formState)
+    .dispatch(Action_UserLogin, formState)
     .then((res) => {
       toast("登录成功！");
       router.push("/");
