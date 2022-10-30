@@ -8,14 +8,17 @@ const routes = [
   {
     path: "/",
     component: Index,
-    // redirect: {
-    //   name: "login",
-    // },
+    meta: {
+      title: '后台首页',
+    }
   },
   {
     path: "/login",
     name: "login",
     component: Login,
+    meta: {
+      title: '登录页',
+    }
   },
   {
     path: "/:pathMatch(.*)*",

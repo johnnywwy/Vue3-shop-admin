@@ -27,10 +27,9 @@ router.beforeEach(async (to, from, next) => {
   if (token) {
     await store.dispatch("getInfo");
   }
-  //   getInfo().then((res2) => {
-  //     store.commit("SET_USERINFO", res2);
-  //     // console.log(res2);
-  //   });
+
+  let title = (to.meta.title ? to.meta.title : '') + '-商城后台'
+  document.title = title
 
   next();
 });
