@@ -6,7 +6,7 @@ export function toast(message, type = "success") {
   return notification[type]({
     message,
     type,
-    duration: 2.5,
+    duration: 1.5,
   });
 }
 

@@ -69,7 +69,6 @@
 import { onBeforeUnmount, onMounted, reactive, ref, toRaw } from "vue";
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import type { FormInstance } from "ant-design-vue";
-import { login } from "../api/manager";
 import { useRouter } from "vue-router";
 import { setToken } from "../composables/auth";
 import { toast } from "../composables/util";

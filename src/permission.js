@@ -4,6 +4,8 @@ import { toast, showFullLoading, hideFullLoading } from "./composables/util";
 import store from "./store";
 
 // 全局前置路由守卫
+let hasGetInfo = false
+
 router.beforeEach(async (to, from, next) => {
   //   console.log(to, from);
 
@@ -23,14 +25,16 @@ router.beforeEach(async (to, from, next) => {
   }
 
   //   如果用户登录了 就自动获取用户信息 并保存在vuex中
-
-  if (token) {
-    await store.dispatch("getInfo");
+  if (token && !hasGetInfo) {
+    // let { menu } = await store.dispatch("getInfo");
+    // 添加动态路由
+    hasGetInfo = true
+    // hasNewRoutes = addRouter(menu)
   }
-  //   getInfo().then((res2) => {
-  //     store.commit("SET_USERINFO", res2);
-  //     // console.log(res2);
-  //   });
+
+  let title = (to.meta.title ? to.meta.title : '') + '-商城后台'
+
+  document.title = title
 
   next();
 });

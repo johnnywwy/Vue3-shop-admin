@@ -1,7 +1,17 @@
 <template>
-  <div>后台首页</div>
-  {{ $store.state.user.username }}
-  <a-button @click="handleLogout">退出登录</a-button>
+  <a-result
+    status="404"
+    :style="{
+      height: '100%',
+      background: '#fff',
+    }"
+    title="Hello World"
+    sub-title="Sorry, you are not authorized to access this page."
+  >
+    <template #extra>
+      <a-button type="primary" @click="handleClick">Back Home</a-button>
+    </template>
+  </a-result>
 </template>
 
 <script setup lang="ts">
@@ -10,7 +20,7 @@ import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { logout } from "../api/manager";
-import { showModal, toast } from "../composables/util";
+import { toast } from "../composables/util";
 import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
 import { createVNode } from "vue";
 
