@@ -1,8 +1,7 @@
 <template>
   <div>
     后台首页
-    {{ $store.state.user.username }}
-    <a-button @click="handleLogout">退出登录</a-button>
+    <!-- {{ $store.state.user.username }} -->
   </div>
 </template>
 

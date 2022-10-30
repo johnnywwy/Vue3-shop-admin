@@ -7,13 +7,14 @@
       <f-menu></f-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0;">
+      <a-layout-header style="background: #fff; padding: 0">
         <f-header></f-header>
       </a-layout-header>
       <a-layout-content style="margin: 16px 16px">
-
         <f-tag-list-vue></f-tag-list-vue>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '80vh' }">
+        <div
+          :style="{ padding: '24px', background: '#fff', minHeight: '80vh' }"
+        >
           <!-- 面包屑 -->
           <!-- <div class="mb-4">
             <a-breadcrumb>
@@ -37,35 +38,25 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
+import FMenu from "./components/FMenu.vue";
+import FHeader from "./components/FHeader.vue";
+import FTagListVue from "./components/FTagList.vue";
+import index from "../pages/index.vue";
 
-import FMenu from './components/FMenu.vue';
-import FHeader from './components/FHeader.vue';
-import FTagListVue from './components/FTagList.vue';
-import index from '../pages/index.vue';
+import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-import PhysicalScoreAnalysisVue from '../pages/analysisManage/PhysicalScoreAnalysis.vue';
-import SubjectScoreAnalysisVue from '../pages/analysisManage/SubjectScoreAnalysis.vue';
-import PhysicalBMIAnalysisVue from '../pages/analysisManage/PhysicalBMIAnalysis.vue';
-
-
-import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-
-
-const collapsed = ref<boolean>(false)
-const route = useRoute()
-const router = useRouter()
+const collapsed = ref<boolean>(false);
+const route = useRoute();
+const router = useRouter();
 console.log(route);
 console.log(router);
-
-
 </script>
 <style scoped lang="less">
 .logo {
   height: 32px;
   margin: 16px;
   background: rgba(255, 255, 255, 0.3);
-
 }
 
 #components-layout-demo-side .logo {
@@ -78,7 +69,7 @@ console.log(router);
   background: #fff;
 }
 
-[data-theme='dark'] .site-layout .site-layout-background {
+[data-theme="dark"] .site-layout .site-layout-background {
   background: #141414;
 }
 
@@ -102,7 +93,7 @@ console.log(router);
 .fade-leave-active {
   transition: all 300ms;
 }
-.fade-enter-active{
+.fade-enter-active {
   transition-delay: 300ms;
 }
 </style>
