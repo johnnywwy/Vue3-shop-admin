@@ -1,6 +1,6 @@
 <template>
   <div>
-    后台首页
+    <div>1</div>
     <!-- {{ $store.state.user.username }} -->
   </div>
 </template>
