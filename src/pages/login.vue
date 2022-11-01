@@ -83,10 +83,6 @@ interface FormState {
   username: string;
   password: string;
 }
-const formState = reactive<FormState>({
-  username: "admin",
-  password: "admin",
-});
 
 // 选中的数据
 const value = ref<string[]>([]);
@@ -111,6 +107,11 @@ const rules = reactive({
       trigger: "blur",
     },
   ],
+});
+
+const formState = reactive<FormState>({
+  username: "admin",
+  password: "admin",
 });
 
 // 登录功能

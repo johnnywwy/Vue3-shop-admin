@@ -1,7 +1,11 @@
 <template>
   <a-layout class="layout">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
-      <div class="logo"></div>
+    <a-layout-sider
+      v-model:collapsed="collapsed"
+      collapsible
+      class="overflow-auto h-100vh"
+    >
+      <div class="logo" />
       <FMenu />
     </a-layout-sider>
     <a-layout>
@@ -63,6 +67,24 @@ const collapsed = ref<boolean>(false);
   background: rgba(255, 255, 255, 0.3);
 }
 .layout {
-  height: calc(100vh);
+  min-height: 100vh;
+}
+
+// 全局滚动条
+::-webkit-scrollbar {
+  background-color: rgba(27, 27, 27, 0.4);
+  border-radius: 10px;
+  width: 4px; //y轴滚动条宽度
+  height: 3px; //x轴滚动条高度
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px; //滚动条的圆角
+  background: rgba(27, 27, 27, 0.4); //滚动条的背景颜色
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px; //滚动条的背景区域的圆角
+  background: #fff; //滚动条的背景颜色
 }
 </style>
