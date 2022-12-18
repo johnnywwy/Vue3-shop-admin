@@ -154,6 +154,11 @@
   "resolved" "https://registry.npmjs.org/@types/web-bluetooth/-/web-bluetooth-0.0.15.tgz"
   "version" "0.0.15"
 
+"@types/web-bluetooth@^0.0.16":
+  "integrity" "sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ=="
+  "resolved" "https://registry.npmjs.org/@types/web-bluetooth/-/web-bluetooth-0.0.16.tgz"
+  "version" "0.0.16"
+
 "@vitejs/plugin-vue@^3.0.3":
   "integrity" "sha512-fmxtHPjSOEIRg6vHYDaem+97iwCUg/uSIaTzp98lhELt2ISOQuDo2hbkBdXod0g15IhfPMQmAxh4heUks2zvDA=="
   "resolved" "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-3.1.0.tgz"
@@ -254,6 +259,16 @@
   "resolved" "https://registry.npmjs.org/@vue/shared/-/shared-3.2.39.tgz"
   "version" "3.2.39"
 
+"@vueuse/core@^9.7.0":
+  "integrity" "sha512-/AGY/t7jJPxCyRoVTygNKoroTiCvRaaZIW+yeSlBCnI7QRpQ9cvXNTdNaSl3GvSyFbn83+XwZwEZvI1OpQfeGw=="
+  "resolved" "https://registry.npmjs.org/@vueuse/core/-/core-9.7.0.tgz"
+  "version" "9.7.0"
+  dependencies:
+    "@types/web-bluetooth" "^0.0.16"
+    "@vueuse/metadata" "9.7.0"
+    "@vueuse/shared" "9.7.0"
+    "vue-demi" "*"
+
 "@vueuse/core@9.3.0":
   "integrity" "sha512-64Rna8IQDWpdrJxgitDg7yv1yTp41ZmvV8zlLEylK4QQLWAhz1OFGZDPZ8bU4lwcGgbEJ2sGi2jrdNh4LttUSQ=="
   "resolved" "https://registry.npmjs.org/@vueuse/core/-/core-9.3.0.tgz"
@@ -278,10 +293,22 @@
   "resolved" "https://registry.npmjs.org/@vueuse/metadata/-/metadata-9.3.0.tgz"
   "version" "9.3.0"
 
+"@vueuse/metadata@9.7.0":
+  "integrity" "sha512-M7WsAgw28FNtTH0bzsGuHEtJOPJqPpyeHS6PHq+8UesLgNjZ9waMAntiUrgUQlxt09M4i2lH7y9sRi0jkfeXGA=="
+  "resolved" "https://registry.npmjs.org/@vueuse/metadata/-/metadata-9.7.0.tgz"
+  "version" "9.7.0"
+
 "@vueuse/shared@9.3.0":
   "integrity" "sha512-caGUWLY0DpPC6l31KxeUy6vPVNA0yKxx81jFYLoMpyP6cF84FG5Dkf69DfSUqL57wX8JcUkJDMnQaQIZPWFEQQ=="
   "resolved" "https://registry.npmjs.org/@vueuse/shared/-/shared-9.3.0.tgz"
   "version" "9.3.0"
+  dependencies:
+    "vue-demi" "*"
+
+"@vueuse/shared@9.7.0":
+  "integrity" "sha512-pwmt1y3TJ2s5KqWmkv9ZKEV59GwuZQZk8XLiU+hGswz0jej318ozbea9E4A/A50ksyM26swSFr7sZ9llNPsZHg=="
+  "resolved" "https://registry.npmjs.org/@vueuse/shared/-/shared-9.7.0.tgz"
+  "version" "9.7.0"
   dependencies:
     "vue-demi" "*"
 

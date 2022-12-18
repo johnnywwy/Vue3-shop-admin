@@ -13,6 +13,13 @@
         </template>
         <redo-outlined @click="refresh" class="btn" />
       </a-tooltip>
+      <a-tooltip placement="bottom">
+        <template #title>
+          <span>全屏</span>
+        </template>
+        <fullscreen-outlined @click="toggle" class="btn" v-if="!isFullscreen" />
+        <fullscreen-exit-outlined @click="toggle" v-else class="btn" />
+      </a-tooltip>
     </div>
 
     <div class="ml-auto">
@@ -45,12 +52,25 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { logout } from "../../api/manager";
 import { toast } from "../../composables/util";
+
 import {
   ExclamationCircleOutlined,
   RedoOutlined,
   DownOutlined,
+  FullscreenOutlined,
+  FullscreenExitOutlined,
 } from "@ant-design/icons-vue";
 import { createVNode } from "vue";
+
+// 全屏
+import { useFullscreen } from "@vueuse/core";
+
+const {
+  // 是否全屏
+  isFullscreen,
+  // 切换全屏
+  toggle,
+} = useFullscreen();
 
 const router = useRouter();
 const store = useStore();
@@ -95,6 +115,7 @@ const closeSide = () => {
   console.log("关闭侧边导航栏");
 };
 </script>
+
 <style scoped lang="less">
 .f-header {
   display: flex;

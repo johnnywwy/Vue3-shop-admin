@@ -1,12 +1,5 @@
 <template>
   <div class="f-header">
-    <!-- <a-form layout="inline" class="form-wrapper flex items-center">
-      <a-form-item label="体测计划：">
-        <a-select ref="select" v-model:value="value1" style="width: 120px" :options="options1" @focus="focus"
-          @change="handleChange">
-        </a-select>
-      </a-form-item>
-    </a-form> -->
     <div class="btn-wrapper">
       <a-tooltip placement="bottom">
         <template #title>
