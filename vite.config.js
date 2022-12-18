@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://ceshi13.dishait.cn",
+        target: "http://sceshi14.dishait.cn",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
