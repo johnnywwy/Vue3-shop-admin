@@ -14,42 +14,6 @@
         confirmText
       }}</a-button>
     </template>
-    <!-- <a-form :model="form" :rules="rules" layout="horizontal" ref="formRef">
-      <a-row :gutter="16">
-        <a-col :span="24">
-          <a-form-item
-            label="原始密码"
-            name="oldpassword"
-            :labelCol="{ span: 4 }"
-          >
-            <a-input
-              v-model:value="form.oldpassword"
-              placeholder="请输入旧密码"
-            />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item
-            label="新密码"
-            name="newpassword"
-            :labelCol="{ span: 4 }"
-          >
-            <a-input
-              v-model:value="form.newpassword"
-              placeholder="请输入新密码"
-            />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="新密码" name="repassword" :labelCol="{ span: 4 }">
-            <a-input
-              v-model:value="form.repassword"
-              placeholder="请再次输入新密码"
-            />
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form> -->
     <div class="formDrawer">
       <slot></slot>
     </div>
@@ -58,11 +22,13 @@
 
 <script setup>
 import { ref } from "vue";
+
 // 显示隐藏抽屉
 const showDrawer = ref(false);
 // 抽屉方向
 const placement = ref("right");
 
+//从外部接收的
 const props = defineProps({
   title: String,
   width: {

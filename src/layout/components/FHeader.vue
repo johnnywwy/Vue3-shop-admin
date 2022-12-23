@@ -25,8 +25,8 @@
     <div class="ml-auto">
       <a-dropdown>
         <a class="ant-dropdown-link" @click.prevent>
-          <a-avatar size="small" :src="$store.state.user.avatar" class="mx-1" />
-          {{ $store.state.user.username }}
+          <a-avatar size="small" :src="store.state.user.avatar" class="mx-1" />
+          {{ store.state.user.username }}
           <DownOutlined />
         </a>
         <template #overlay>
