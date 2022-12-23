@@ -1,12 +1,12 @@
 <template>
   <a-layout-header style="background: #fff; padding: 0 16px" class="f-header">
     <div class="btn-wrapper">
-      <a-tooltip placement="bottom">
+      <!-- <a-tooltip placement="bottom">
         <template #title>
           <span>合并导航栏</span>
         </template>
         <menu-fold-outlined class="btn" @click="toggleAside" />
-      </a-tooltip>
+      </a-tooltip> -->
       <a-tooltip placement="bottom">
         <template #title>
           <span>刷新</span>
