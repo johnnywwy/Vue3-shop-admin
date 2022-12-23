@@ -1,6 +1,10 @@
 import axios from "axios";
 import { toast } from "./composables/util";
 import { getToken } from "./composables/auth";
+// import { store } from "vuex";
+// import { useStore } from "vuex";
+// const store = useStore()
+
 const service = axios.create({
   baseURL: "/api",
 });
@@ -29,8 +33,16 @@ service.interceptors.response.use(
     return response.data.data;
   },
   function (error) {
+    const msg = error.response.data.msg || "登录失败！"
     // 对响应错误做点什么
-    toast(error.response.data.msg || "登录失败！", "error");
+
+    // if (mes === '非法token，请先登录') {
+    //   store.dispatch('logout').finally(() => {
+    //     location.reload()
+    //   })
+    // }
+
+    toast(msg, "error");
     return Promise.reject(error);
   }
 );
