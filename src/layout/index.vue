@@ -18,6 +18,7 @@
           minHeight: '280px',
         }"
       >
+        <f-tag-list-vue></f-tag-list-vue>
         <RouterView></RouterView>
       </a-layout-content>
     </a-layout>
