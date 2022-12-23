@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout">
+  <a-layout class="layout" @childFn="fn">
     <a-layout-sider
       v-model:collapsed="collapsed"
       collapsible
@@ -18,7 +18,7 @@
           minHeight: '280px',
         }"
       >
-        <f-tag-list-vue></f-tag-list-vue>
+        <FTagListVue />
         <RouterView></RouterView>
       </a-layout-content>
     </a-layout>
@@ -37,7 +37,12 @@ import FMenu from "./components/FMenu.vue";
 import FHeader from "./components/FHeader.vue";
 import FTagListVue from "./components/FTagList.vue";
 import { ref } from "vue";
+
 const collapsed = ref<boolean>(false);
+const fn = (data) => {
+  console.log("data", data);
+};
+fn();
 </script>
 <style lang="less" scoped>
 #components-layout-demo-custom-trigger .trigger {

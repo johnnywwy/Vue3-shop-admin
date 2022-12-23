@@ -5,7 +5,7 @@
         <template #title>
           <span>合并导航栏</span>
         </template>
-        <menu-fold-outlined class="btn" @click="closeSide" />
+        <menu-fold-outlined class="btn" @click="toggleAside" />
       </a-tooltip>
       <a-tooltip placement="bottom">
         <template #title>
@@ -94,6 +94,7 @@ import { MenuProps, Modal } from "ant-design-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { toast } from "../../composables/util";
+import { ref, defineEmits } from "vue";
 
 import {
   ExclamationCircleOutlined,
@@ -121,6 +122,8 @@ const { formDrawerRef, form, rules, formRef, onSubmit, openRePasswordForm } =
 // 退出登录
 const { handleLogout } = useLogout();
 
+const emit = defineEmits(["childFn"]);
+const collapsed = ref<boolean>(false);
 // 退出登录
 const onClick: MenuProps["onClick"] = ({ key }) => {
   console.log(key);
@@ -141,8 +144,10 @@ const refresh = () => {
 };
 
 //
-const closeSide = () => {
-  console.log("关闭侧边导航栏");
+const toggleAside = () => {
+  collapsed.value = !collapsed.value;
+  console.log("切换侧边导航栏", collapsed.value);
+  emit("childFn", collapsed.value);
 };
 </script>
 
