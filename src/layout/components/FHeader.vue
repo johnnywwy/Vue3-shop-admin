@@ -1,12 +1,12 @@
 <template>
-  <a-layout-header style="background: #fff; padding: 0 16px" class="f-header">
+  <a-layout-header style="background: #fff; padding: 0 20px" class="f-header">
     <div class="btn-wrapper">
-      <!-- <a-tooltip placement="bottom">
+      <a-tooltip placement="bottom">
         <template #title>
           <span>合并导航栏</span>
         </template>
         <menu-fold-outlined class="btn" @click="toggleAside" />
-      </a-tooltip> -->
+      </a-tooltip>
       <a-tooltip placement="bottom">
         <template #title>
           <span>刷新</span>
@@ -153,8 +153,11 @@ const toggleAside = () => {
 
 <style scoped lang="less">
 .f-header {
-  display: flex;
-  @apply flex items-center px-5;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: calc(100% - 200px);
+  @apply flex items-center px-10;
 
   .btn-wrapper {
     @apply flex items-center justify-center;

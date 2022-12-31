@@ -7,8 +7,15 @@ const store = createStore({
     return {
       // 用户信息
       user: {},
+
       // 侧边宽度
-      asideWidth: '200px'
+      asideWidth: '200px',
+
+      // 菜单相关
+      menus: [],
+
+      // 菜单权限相关
+      ruleNames: []
     };
   },
   mutations: {
@@ -19,6 +26,13 @@ const store = createStore({
     // 展开或缩小侧边栏
     toggleAsideWidth(state, asideWidth) {
       state.asideWidth = state.asideWidth === '200px' ? '64px' : '200px'
+    },
+    // 设置路由
+    SET_MENUS(state, menus) {
+      state.menus = menus
+    },
+    SET_RULENAMES(state, ruleNames) {
+      state.ruleNames = ruleNames
     }
   },
   actions: {
@@ -42,6 +56,8 @@ const store = createStore({
         getinfo()
           .then((res) => {
             commit("SET_USERINFO", res);
+            commit("SET_MENUS", res.menus)
+            commit("SET_RULENAMES", res.ruleNames)
             resolve(res);
           })
           .catch((err) => {

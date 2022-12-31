@@ -1,9 +1,11 @@
 <template>
   <a-menu
     v-model:selectedKeys="selectedKeys"
+    v-model:openKeys="openKeys"
     theme="dark"
     mode="inline"
     @select="selectMenu"
+    @openChange="onOpenChange"
   >
     <template v-for="(item, index) in asideMenus" :key="index">
       <a-sub-menu :key="item.name" v-if="item.child && item.child.length > 0">
@@ -13,7 +15,9 @@
         <template #title>
           <span>{{ item.name }}</span>
         </template>
-        <a-menu-item :key="item2.path" v-for="(item2, index2) in item.child"
+        <a-menu-item
+          :key="item2.frontpath"
+          v-for="(item2, index2) in item.child"
           >{{ item2.name }}
           <template #icon>
             <TeamOutlined />
@@ -21,7 +25,7 @@
         </a-menu-item>
       </a-sub-menu>
 
-      <a-menu-item :key="item.path" v-else>
+      <a-menu-item :key="item.frontpath" v-else>
         <file-outlined />
         <span>{{ item.name }}</span>
       </a-menu-item>
@@ -30,7 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
 import {
   PieChartOutlined,
   DesktopOutlined,
@@ -38,45 +43,50 @@ import {
   TeamOutlined,
   FileOutlined,
 } from "@ant-design/icons-vue";
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 
+const store = useStore();
 const router = useRouter();
-const selectedKeys = ref<string[]>(["1"]);
-const asideMenus = [
-  {
-    name: "后台面板",
-    icon: "userOutlined",
-    path: "/",
-    child: [
-      {
-        name: "首页",
-        icon: "DesktopOutlined",
-        path: "/index",
-      },
-    ],
-  },
-  {
-    name: "商城管理",
-    icon: "PieChartOutlined",
-    path: "/goods",
-    child: [
-      {
-        name: "主控台2",
-        icon: "TeamOutlined",
-        path: "/goods/list",
-      },
-    ],
-  },
-  {
-    name: "文件",
-    icon: "FileOutlined",
-    path: "/file",
-  },
-];
+const route = useRoute();
+
+// 默认选中的菜单
+const selectedKeys = ref<string[]>([route.path]);
+
+// 默认打开的菜单
+const openKeys = ref([route.meta.title]);
+
+// 侧边菜单栏
+const asideMenus = computed(() => store.state.menus);
+
+console.log(route);
+
+// watch(
+//   () => openKeys.value,
+//   (_val, oldVal) => {
+//     console.log(_val, oldVal);
+
+//     openKeys.value = oldVal;
+//   }
+// );
 
 // 选择
 const selectMenu = (e: any) => {
   console.log(e);
+  console.log(route);
+
   router.push(e.key);
+  // console.log(asideMenus.value);
+};
+
+const onOpenChange = (openKeys: string[]) => {
+  // const latestOpenKey = openKeys.find(
+  //   (key) => openKeys.value.indexOf(key) === -1
+  // );
+  // if (state.rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
+  //   state.openKeys = openKeys;
+  // } else {
+  //   state.openKeys = latestOpenKey ? [latestOpenKey] : [];
+  // }
 };
 </script>
+<style scoped lang="less"></style>

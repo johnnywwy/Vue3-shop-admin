@@ -12,6 +12,9 @@ const routes = [
   {
     path: "/",
     component: Admin,
+    meta: {
+      title: '后台面板'
+    },
     children: [
       {
         path: "index",

@@ -12,20 +12,17 @@
 
 /* 配置滚动条 */
 ::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+  width: 8px;
   height: 1px;
 }
 ::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: #535353;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(67, 66, 66, 0);
+  background: #8a88888e;
 }
 ::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(194, 27, 27, 0.091);
+  border-radius: 5px;
   background: #ededed;
 }
 </style>
