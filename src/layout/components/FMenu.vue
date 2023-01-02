@@ -52,27 +52,25 @@ const route = useRoute();
 // 默认选中的菜单
 const selectedKeys = ref<string[]>([route.path]);
 
-// 默认打开的菜单
-const openKeys = ref([route.meta.title]);
+// 默认打开的一级菜单
+const openKeys = ref(["/"]);
 
 // 侧边菜单栏
 const asideMenus = computed(() => store.state.menus);
 
-console.log(route);
-
-// watch(
-//   () => openKeys.value,
-//   (_val, oldVal) => {
-//     console.log(_val, oldVal);
-
-//     openKeys.value = oldVal;
-//   }
-// );
+// 监听路由的变化
+watch(
+  () => route.path,
+  (_new, oldVal) => {
+    console.log("新的" + _new, "旧的" + oldVal);
+    selectedKeys.value = [_new];
+  }
+);
 
 // 选择
 const selectMenu = (e: any) => {
-  console.log(e);
-  console.log(route);
+  // console.log(e);
+  // console.log(route);
 
   router.push(e.key);
   // console.log(asideMenus.value);

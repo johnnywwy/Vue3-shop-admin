@@ -1,4 +1,4 @@
-import router from "./router";
+import { router, addRoutes } from "./router";
 import { getToken } from "./composables/auth";
 import { toast, showFullLoading, hideFullLoading } from "./composables/util";
 import store from "./store";
@@ -25,19 +25,21 @@ router.beforeEach(async (to, from, next) => {
   }
 
   //   如果用户登录了 就自动获取用户信息 并保存在vuex中
+  let hasNewRoutes = false
   if (token && !hasGetInfo) {
-    store.dispatch("getInfo");
+    let { menus } = await store.dispatch("getInfo");
     // 添加动态路由
-    // hasGetInfo = true
-    // hasNewRoutes = addRouter(menu)
+    // console.log(menus);
+    hasGetInfo = true
+    hasNewRoutes = addRoutes(menus)
   }
 
-  console.log(to);
+  // console.log(to);
   let title = (to.meta.title ? to.meta.title : '') + '-商城后台'
 
   document.title = title
 
-  next();
+  hasNewRoutes ? next(to.fullPath) : next();
 });
 
 router.afterEach((to, from,) => {

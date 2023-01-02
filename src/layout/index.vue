@@ -26,13 +26,14 @@
       <a-layout-content
         :style="{
           margin: '80px 16px',
-          padding: '24px',
-          background: 'pink',
+          background: '#fff',
           minHeight: '280px',
         }"
       >
         <FTagListVue />
-        <RouterView></RouterView>
+        <div :style="{ padding: '12px' }">
+          <RouterView />
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
